@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beauty Glow: tienda virtual de maquillaje y productos de belleza.">
+  <title>Beauty Glow | Maquillaje y belleza</title>
+
+  <!-- Tipografías: Playfair Display (títulos) y Poppins (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Logotipo -->
+      <a href="#inicio" class="logo" data-nav>BEAUTY <span>GLOW</span></a>
+
+      <!-- Menú de navegación -->
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="#inicio" data-nav>Inicio</a></li>
+          <li><a href="#nosotros" data-nav>Nosotros</a></li>
+          <li><a href="#productos" data-nav>Productos</a></li>
+          <li><a href="#beneficios" data-nav>Beneficios</a></li>
+          <li><a href="#testimonios" data-nav>Testimonios</a></li>
+          <li><a href="#contacto" data-nav>Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Buscador + carrito -->
+      <div class="header__actions">
+        <form class="search" id="searchForm" role="search" autocomplete="off">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="search" id="searchInput" placeholder="Buscar productos..." aria-label="Buscar productos">
+          <button type="button" class="search__clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>&times;</button>
+        </form>
+
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="Abrir carrito">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.5a2 2 0 002-1.5L20.5 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== VISTA: TIENDA ===================== -->
+  <main id="viewStore">
+
+    <!-- INICIO -->
+    <section class="hero" id="inicio">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <span class="tag">Nueva colección 2026</span>
+          <h1>Resalta tu belleza, <em>luce tu esencia</em></h1>
+          <p>Descubre una colección de maquillaje diseñada para resaltar tu belleza natural. Encuentra tus tonos favoritos y expresa tu estilo con productos que te hacen sentir única.</p>
+          <div class="hero__buttons">
+            <a href="#productos" class="btn btn--primary" data-nav>Comprar ahora</a>
+            <a href="#nosotros" class="btn btn--secondary" data-nav>Conócenos</a>
+          </div>
+          <ul class="hero__stats">
+            <li><strong>15</strong> productos</li>
+            <li><strong>4</strong> tonos por base</li>
+            <li><strong>100%</strong> cuidado</li>
+          </ul>
+        </div>
+        <div class="hero__image reveal">
+          <span class="blob blob--pink"></span>
+          <span class="blob blob--purple"></span>
+          <img src="https://images.unsplash.com/photo-1764333746348-1df13b3a4aae?auto=format&fit=crop&w=900&q=80" alt="Colección de maquillaje Beauty Glow: paletas y productos de belleza">
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="section section--nude" id="nosotros">
+      <div class="container about">
+        <div class="about__image reveal">
+          <img src="https://images.unsplash.com/photo-1620464003286-a5b0d79f32c2?auto=format&fit=crop&w=800&q=80" alt="Brochas y productos de belleza" loading="lazy">
+        </div>
+        <div class="about__text reveal">
+          <span class="tag">Nosotros</span>
+          <h2>Una marca pensada para ti</h2>
+          <p>En Beauty Glow creemos que cada persona tiene una belleza única. Nuestro propósito es ofrecer productos de maquillaje que te permitan expresar tu personalidad, sentirte segura y disfrutar de cada momento. Queremos acompañarte en tu rutina de belleza con productos seleccionados para ti.</p>
+          <ul class="checklist">
+            <li>Selección cuidadosa de productos</li>
+            <li>Tonos pensados para todas las pieles</li>
+            <li>Acompañamiento en tu rutina de belleza</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="section" id="productos">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="tag">Catálogo</span>
+          <h2>Nuestros productos</h2>
+          <p>Elige tus favoritos. Precios en pesos colombianos (COP).</p>
+        </div>
+        <p class="results-info" id="resultsInfo" aria-live="polite"></p>
+        <div class="products" id="productGrid"></div>
+        <div class="no-results" id="noResults" hidden>
+          <p>No encontramos productos que coincidan con tu búsqueda.</p>
+          <button class="btn btn--secondary" id="noResultsClear">Limpiar búsqueda</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="section section--nude" id="beneficios">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="tag">Beneficios</span>
+          <h2>Por qué elegir Beauty Glow</h2>
+        </div>
+        <div class="benefits">
+          <article class="benefit reveal">
+            <div class="benefit__icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2.5 5.5 6 .7-4.4 4.1 1.2 5.9L12 15.3 6.7 19.2l1.2-5.9L3.5 9.2l6-.7z"/></svg></div>
+            <h3>Productos seleccionados</h3>
+            <p>Elegimos cada producto pensando en su calidad, textura y duración.</p>
+          </article>
+          <article class="benefit reveal">
+            <div class="benefit__icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="9" r="4"/><circle cx="16" cy="9" r="4"/><circle cx="12" cy="15" r="4"/></svg></div>
+            <h3>Variedad de tonos</h3>
+            <p>Bases, polvos y labiales en tonos para que encuentres el tuyo.</p>
+          </article>
+          <article class="benefit reveal">
+            <div class="benefit__icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Compra fácil y segura</h3>
+            <p>Un proceso de compra claro, paso a paso y sin complicaciones.</p>
+          </article>
+          <article class="benefit reveal">
+            <div class="benefit__icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
+            <h3>Atención personalizada</h3>
+            <p>Te asesoramos por WhatsApp para elegir lo que mejor va contigo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section" id="testimonios">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="tag">Testimonios</span>
+          <h2>Lo que dicen nuestras clientas</h2>
+          <p>Opiniones de ejemplo con nombres ilustrativos.</p>
+        </div>
+        <div class="testimonials">
+          <article class="testimonial reveal">
+            <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p>“La base tiene una cobertura hermosa y el tono medio me quedó perfecto. Se siente ligera todo el día.”</p>
+            <footer>
+              <span class="avatar avatar--a1" aria-hidden="true">M</span>
+              <div><strong>María Fernanda</strong><span>Cliente ilustrativa</span></div>
+            </footer>
+          </article>
+          <article class="testimonial reveal">
+            <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p>“Me encantó la paleta de sombras, los colores son suaves y se difuminan muy fácil. Súper recomendada.”</p>
+            <footer>
+              <span class="avatar avatar--a2" aria-hidden="true">C</span>
+              <div><strong>Camila Rojas</strong><span>Cliente ilustrativa</span></div>
+            </footer>
+          </article>
+          <article class="testimonial reveal">
+            <div class="stars" aria-label="4 de 5 estrellas">★★★★☆</div>
+            <p>“El labial mate en tono vino dura muchísimo y la atención por WhatsApp fue muy amable.”</p>
+            <footer>
+              <span class="avatar avatar--a3" aria-hidden="true">V</span>
+              <div><strong>Valentina Gómez</strong><span>Cliente ilustrativa</span></div>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section section--nude" id="contacto">
+      <div class="container contact">
+        <div class="contact__info reveal">
+          <span class="tag">Contacto</span>
+          <h2>Hablemos</h2>
+          <p>¿Tienes dudas sobre un tono o un pedido? Escríbenos y te ayudamos.</p>
+
+          <!-- CONFIGURAR: cambia el número de WhatsApp en script.js (CONFIG.whatsapp) -->
+          <a href="#" class="btn btn--whatsapp" id="whatsappBtn" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+
+          <!-- CONFIGURAR: reemplaza # por los enlaces reales de tus redes sociales -->
+          <div class="socials" aria-label="Redes sociales">
+            <a href="#" class="social" data-social="Instagram" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".6"/></svg></a>
+            <a href="#" class="social" data-social="Facebook" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 00-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+            <a href="#" class="social" data-social="TikTok" aria-label="TikTok"><svg class="icon" viewBox="0 0 24 24"><path d="M14 4v10.5a3.5 3.5 0 11-3.5-3.5"/><path d="M14 4c.5 2.5 2 4 4.5 4.2"/></svg></a>
+          </div>
+        </div>
+
+        <form class="form-card reveal" id="contactForm" novalidate>
+          <h3>Envíanos un mensaje</h3>
+          <div class="field">
+            <label for="cName">Nombre</label>
+            <input type="text" id="cName" name="name" placeholder="Tu nombre" autocomplete="name">
+            <small class="error" data-error-for="cName"></small>
+          </div>
+          <div class="field">
+            <label for="cEmail">Correo electrónico</label>
+            <input type="email" id="cEmail" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+            <small class="error" data-error-for="cEmail"></small>
+          </div>
+          <div class="field">
+            <label for="cMessage">Mensaje</label>
+            <textarea id="cMessage" name="message" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+            <small class="error" data-error-for="cMessage"></small>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Enviar mensaje</button>
+          <p class="form-note" id="contactNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== VISTA: CHECKOUT ===================== -->
+  <main id="viewCheckout" class="view" hidden>
+    <div class="container checkout">
+      <button class="link-back" id="backToStore">&larr; Volver a la tienda</button>
+      <h2 class="checkout__title">Finalizar compra</h2>
+
+      <!-- Aviso de modo demostración -->
+      <div class="demo-banner" role="note">
+        <strong>Belleza que encanta.</strong> 
+      </div>
+
+      <div class="checkout__grid">
+        <div class="checkout__main">
+
+          <!-- Datos de envío -->
+          <form id="checkoutForm" class="form-card" novalidate>
+            <h3><span class="step">1</span> Datos de envío</h3>
+            <div class="form-grid">
+              <div class="field field--full">
+                <label for="fName">Nombre completo</label>
+                <input type="text" id="fName" name="name" placeholder="Nombre y apellido" autocomplete="name">
+                <small class="error" data-error-for="fName"></small>
+              </div>
+              <div class="field">
+                <label for="fEmail">Correo electrónico</label>
+                <input type="email" id="fEmail" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+                <small class="error" data-error-for="fEmail"></small>
+              </div>
+              <div class="field">
+                <label for="fPhone">Teléfono celular</label>
+                <input type="tel" id="fPhone" name="phone" placeholder="300 123 4567" autocomplete="tel" inputmode="numeric">
+                <small class="error" data-error-for="fPhone"></small>
+              </div>
+              <div class="field">
+                <label for="fCity">Ciudad</label>
+                <input type="text" id="fCity" name="city" placeholder="Ej: Cali" autocomplete="address-level2">
+                <small class="error" data-error-for="fCity"></small>
+              </div>
+              <div class="field">
+                <label for="fNeighborhood">Barrio</label>
+                <input type="text" id="fNeighborhood" name="neighborhood" placeholder="Ej: San Fernando">
+                <small class="error" data-error-for="fNeighborhood"></small>
+              </div>
+              <div class="field field--full">
+                <label for="fAddress">Dirección de entrega</label>
+                <input type="text" id="fAddress" name="address" placeholder="Ej: Calle 5 # 38-20, apto 301" autocomplete="street-address">
+                <small class="error" data-error-for="fAddress"></small>
+              </div>
+            </div>
+          </form>
+
+
+          <section class="form-card" id="paymentCard">
+            <h3><span class="step">2</span> Método de pago</h3>
+            <div class="pay-methods" id="payMethods" role="radiogroup" aria-label="Métodos de pago"></div>
+            <small class="error" id="payError"></small>
+            <div class="pay-info" id="payInfo" aria-live="polite">
+              <p>Selecciona un método de pago para ver las instrucciones.</p>
+            </div>
+          </section>
+        </div>
+
+        <aside class="summary" aria-label="Resumen del pedido">
+          <h3>Resumen del pedido</h3>
+          <ul class="summary__list" id="summaryList"></ul>
+          <dl class="totals">
+            <div><dt>Subtotal</dt><dd id="sumSubtotal">$0</dd></div>
+            <div><dt>Envío (ilustrativo)</dt><dd id="sumShipping">$0</dd></div>
+            <div class="totals__final"><dt>Total a pagar</dt><dd id="sumTotal">$0</dd></div>
+          </dl>
+          <button class="btn btn--primary btn--block" id="confirmOrder">Confirmar pedido (demo)</button>
+          <p class="summary__note"></p>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <main id="viewConfirm" class="view" hidden>
+    <div class="container confirm">
+      <div class="confirm__card">
+        <div class="confirm__check"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2>GRACIAS POR TU COMPRA</h2>
+        <p class="confirm__demo"><strong></strong>Belleza</p>
+        <p class="confirm__order">Número de pedido: <strong id="confOrderId"></strong></p>
+
+        <div class="confirm__grid">
+          <div>
+            <h4>Datos del cliente</h4>
+            <ul class="plain" id="confCustomer"></ul>
+          </div>
+          <div>
+            <h4>Entrega y pago</h4>
+            <ul class="plain" id="confDelivery"></ul>
+          </div>
+        </div>
+
+        <h4>Productos</h4>
+        <ul class="summary__list" id="confItems"></ul>
+        <dl class="totals">
+          <div><dt>Subtotal</dt><dd id="confSubtotal"></dd></div>
+          <div><dt>Envío (ilustrativo)</dt><dd id="confShipping"></dd></div>
+          <div class="totals__final"><dt>Total</dt><dd id="confTotal"></dd></div>
+        </dl>
+
+        <button class="btn btn--primary" id="backFromConfirm">Volver a la tienda</button>
+      </div>
+    </div>
+  </main>
+
+ 
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="#inicio" class="logo logo--light" data-nav>BEAUTY <span>GLOW</span></a>
+        <p>Maquillaje y productos de belleza para resaltar tu esencia natural.</p>
+      </div>
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <ul class="plain">
+          <li><a href="#inicio" data-nav>Inicio</a></li>
+          <li><a href="#nosotros" data-nav>Nosotros</a></li>
+          <li><a href="#productos" data-nav>Productos</a></li>
+          <li><a href="#contacto" data-nav>Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        
+        <ul class="plain">
+          <li>contacto@beautyglow.example</li>
+          <li>+57 300 000 0000</li>
+          <li>Cali, Colombia</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <div class="socials">
+          <a href="#" class="social" data-social="Instagram" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".6"/></svg></a>
+          <a href="#" class="social" data-social="Facebook" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 00-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+          <a href="#" class="social" data-social="TikTok" aria-label="TikTok"><svg class="icon" viewBox="0 0 24 24"><path d="M14 4v10.5a3.5 3.5 0 11-3.5-3.5"/><path d="M14 4c.5 2.5 2 4 4.5 4.2"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__copy">&copy; 2026 Beauty Glow. Todos los derechos reservados. Proyecto académico de demostración.</p>
+  </footer>
+
+  <div class="modal" id="toneModal" role="dialog" aria-modal="true" aria-labelledby="toneTitle" hidden>
+    <div class="modal__box">
+      <button class="modal__close" id="toneClose" aria-label="Cerrar">&times;</button>
+      <h3 id="toneTitle">Elige tu tono</h3>
+      <p class="modal__product" id="toneProduct"></p>
+      <div class="tones" id="toneOptions" role="radiogroup" aria-labelledby="toneTitle"></div>
+      <small class="error" id="toneError"></small>
+      <div class="modal__actions">
+        <button class="btn btn--secondary" id="toneCancel">Cancelar</button>
+        <button class="btn btn--primary" id="toneConfirm">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="cartDrawer" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="drawer__head">
+      <h3>Tu carrito</h3>
+      <button class="modal__close" id="cartClose" aria-label="Cerrar carrito">&times;</button>
+    </div>
+    <ul class="drawer__items" id="cartItems"></ul>
+    <p class="drawer__empty" id="cartEmpty">Tu carrito está vacío.</p>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Subtotal</span><strong id="cartSubtotal">$0</strong></div>
+      <small>El envío se calcula en el checkout.</small>
+      <button class="btn btn--primary btn--block" id="checkoutBtn">Finalizar compra</button>
+      <button class="btn-text" id="clearCart">Vaciar carrito</button>
+    </div>
+  </aside>
+
+ 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
